@@ -42,7 +42,8 @@ const addConfig = ({ app_name, env_file, appdir }) => {
       configVars.push(key.substring(3) + "='" + process.env[key] + "'");
     } 
     if (key.startsWith("SHD_")) {
-      execSync(`heroku run --app=${heroku.app_name} echo "export ${key.substring(4)}=${process.env[key]}" > profile.d/${key.substring(4)}.sh`);
+      execSync(`heroku run touch profile.d/${key.substring(4)}.sh`);
+      execSync(`heroku run --app=${app_name} echo "export ${key.substring(4)}=${process.env[key]}" > profile.d/${key.substring(4)}.sh`);
     }
   }
   if (env_file) {
