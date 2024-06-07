@@ -222,7 +222,7 @@ if (heroku.dockerBuildArgs) {
 
     addRemote(heroku);
     addConfig(heroku);
-    execSync(`heroku run --app=${app_name} ls -la`);
+    execSync(`heroku run --app=${heroku.app_name} ls -la`);
 
     try {
       deploy({ ...heroku, dontuseforce: true });
