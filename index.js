@@ -39,6 +39,8 @@ const addConfig = ({ app_name, env_file, appdir }) => {
   for (let key in process.env) {
     if (key.startsWith("HD_")) {
       configVars.push(key.substring(3) + "='" + process.env[key] + "'");
+    } else {
+      execSync(`heruku run export ${key}=${process.env[key]} --app=${app_name}`)
     }
   }
   if (env_file) {
