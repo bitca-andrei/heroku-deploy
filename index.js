@@ -41,7 +41,7 @@ const addConfig = ({ app_name, env_file, appdir }) => {
       configVars.push(key.substring(3) + "='" + process.env[key] + "'");
     } 
     if (key.startsWith("SHD_")) {
-      execSync(`heroku run export ${key}=${process.env[key]} --app=${app_name}`)
+      execSync(`heroku run export ${key.substring(4)}=${process.env[key]} --app=${app_name}`)
     }
   }
   if (env_file) {
