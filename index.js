@@ -35,14 +35,14 @@ const addRemote = ({ app_name, dontautocreate, buildpack, region, team, stack })
 };
 
 const addConfig = ({ app_name, env_file, appdir }) => {
-  execSync(`heroku run --app=${app_name} mkdir -p ~/.profile.d`);
+  execSync(`heroku run mkdir -p /app/.profile.d --app=${app_name}`);
   let configVars = [];
   for (let key in process.env) {
     if (key.startsWith("HD_")) {
       configVars.push(key.substring(3) + "='" + process.env[key] + "'");
     } 
     if (key.startsWith("SHD_")) {
-      execSync(`heroku run --app=${app_name} echo "export ${key.substring(4)}=${process.env[key]}" > ~/.profile.d/${key.substring(4)}.sh`);
+      execSync(`heroku run --app=${app_name} echo "export ${key.substring(4)}=${process.env[key]}" > /app/.profile.d/${key.substring(4)}.sh`);
     }
   }
   if (env_file) {
